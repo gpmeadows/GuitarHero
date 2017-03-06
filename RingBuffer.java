@@ -8,7 +8,15 @@ public class RingBuffer
   // Attribute
   private int head; // head of the list(where to remove next element)
   private int tail; // tail of the list (where to ass next element)
-  private iint size; // number of elements in the list
+  private int size; // number of elements in the list
+  private int[] buffer; // contains list of samples
 
-  // Constructor
+  // Default Constructor
+  public RingBuffer()
+  {
+    head = 0;
+    tail = 0;
+    size = 0;
+    
+  }
 }
