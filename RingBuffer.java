@@ -24,5 +24,9 @@ public class RingBuffer
     return count; // (tail - head) % N
   }
 
-  
+  // Checks if buffer is empty
+  public boolean isEmpty()
+  {
+    return count == 0;
+  }
 }
