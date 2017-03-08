@@ -29,4 +29,10 @@ public class RingBuffer
   {
     return count == 0;
   }
+
+  // Check if buffer is full
+  public boolean isFull()
+  {
+    return count == buffer.length;
+  }
 }
