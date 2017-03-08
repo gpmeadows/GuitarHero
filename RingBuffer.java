@@ -43,6 +43,7 @@ public class RingBuffer
     {
       buffer[tail] = x;
       tail = (tail + 1) % buffer.length;
+      count++;
     }
     else
     {
@@ -50,4 +51,21 @@ public class RingBuffer
       // throw new Exception("Buffer is full");
     }
   }
+
+  // Remove a samples
+  public double dequeue()
+  {
+    if (!isEmpty())
+    {
+      double item = buffer[head];
+      head = (head + 1) % buffer.length;
+      count--;
+    }
+    else
+    {
+      System.out.println("Buffer is empty");
+    }
+  }
+
+  
 }
