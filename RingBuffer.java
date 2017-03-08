@@ -35,4 +35,19 @@ public class RingBuffer
   {
     return count == buffer.length;
   }
+
+  // insert a sample
+  public void enqueue(double x)
+  {
+    if (!isFull())
+    {
+      buffer[tail] = x;
+      tail = (tail + 1) % buffer.length;
+    }
+    else
+    {
+      System.out.println("Buffer is full...");
+      // throw new Exception("Buffer is full");
+    }
+  }
 }
