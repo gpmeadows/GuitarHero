@@ -19,6 +19,15 @@ public class RingBuffer
     count = 0;
   }
 
+  // Overloading Constructor
+  public RingBuffer(int capacity)
+  {
+    buffer = new double[capacity];
+    head = 0;
+    tail = 0;
+    count = 0;
+  }
+
   public int size()  // returns number of elements in the buffer
   {
     return count; // (tail - head) % N
@@ -65,9 +74,19 @@ public class RingBuffer
     else
     {
       System.out.println("Buffer is empty");
-      // throw new Exception("Buffer is full");
-      return 0.0;
+      throw new Exception("Buffer is full");
+      // return 0.0;
     }
+  }
+
+  public int getHead()
+  {
+    return head;
+  }
+
+  public int getTail()
+  {
+    return tail;
   }
 
   // Return the head of the list
