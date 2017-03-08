@@ -53,19 +53,26 @@ public class RingBuffer
   }
 
   // Remove a samples
-  public double dequeue()
+  public double dequeue() throws Exception
   {
     if (!isEmpty())
     {
       double item = buffer[head];
       head = (head + 1) % buffer.length;
       count--;
+      return item;
     }
     else
     {
       System.out.println("Buffer is empty");
+      // throw new Exception("Buffer is full");
+      return 0.0;
     }
   }
 
-  
+  // Return the head of the list
+  public double peak()
+  {
+    return buffer[head];
+  }
 }
