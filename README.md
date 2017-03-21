@@ -8,6 +8,8 @@ javac GuitarHero.java
 
 ## How to run
 
+```
 java GuitarHero
+```
 
 ##
