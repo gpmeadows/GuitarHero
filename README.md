@@ -3,10 +3,13 @@
 ## How to compile
 
 ```
-javac
+javac GuitarHero.java
 ```
 
 ## How to run
 
+```
+java GuitarHero
+```
 
 ##
