@@ -1,97 +1,64 @@
 //----------------------------------------
 // Name: Grayson Meadows
 // Class: CS 1233
-// Program: Buffer data structure as fifo
 // ---------------------------------------
-public class RingBuffer
-{
-  // Attribute
-  private int head; // head of the list(where to remove next element)
-  private int tail; // tail of the list (where to ass next element)
-  private int count; // number of elements in the list
-  private double[] buffer; // contains list of samples
+public class RingBuffer {
+//instance variables
 
-  // Default Constructor
-  public RingBuffer()
-  {
-    head = 0;
-    tail = 0;
-    count = 0;
-  }
+	int n; //How many elements in the RingBuffer
+	double[] data; //The array of elements
+	int first; //The index of the first element
 
-  // Overloading Constructor
-  public RingBuffer(int capacity)
-  {
-    buffer = new double[capacity];
-    head = 0;
-    tail = 0;
-    count = 0;
-  }
 
-  public int size()  // returns number of elements in the buffer
-  {
-    return count; // (tail - head) % N
-  }
+	//initializes the RingBuffer
+	public RingBuffer(int capacity){
+		this.first = 0;
+		this.n = 0;
+		this.data = new double[capacity];
+	}
 
-  // Checks if buffer is empty
-  public boolean isEmpty()
-  {
-    return count == 0;
-  }
+	public int size(){
+		return this.n;
+	}
 
-  // Check if buffer is full
-  public boolean isFull()
-  {
-    return count == buffer.length;
-  }
+	public boolean isEmpty(){
+		return (this.n <= 0);
+	}
 
-  // insert a sample
-  public void enqueue(double x)
-  {
-    if (!isFull())
-    {
-      buffer[tail] = x;
-      tail = (tail + 1) % buffer.length;
-      count++;
-    }
-    else
-    {
-      System.out.println("Buffer is full...");
-      // throw new Exception("Buffer is full");
-    }
-  }
+	public boolean isFull(){
+		return (this.n >= this.data.length);
+	}
 
-  // Remove a samples
-  public double dequeue() throws Exception
-  {
-    if (!isEmpty())
-    {
-      double item = buffer[head];
-      head = (head + 1) % buffer.length;
-      count--;
-      return item;
-    }
-    else
-    {
-      System.out.println("Buffer is empty");
-      throw new Exception("Buffer is full");
-      // return 0.0;
-    }
-  }
 
-  public int getHead()
-  {
-    return head;
-  }
+	//throws an exception if the RingBuffer is full, otherwise it adds a value to the end of the RingBuffer.
+	public void enqueue(double x) throws RuntimeException {
+		if(isFull()){
+			throw new RuntimeException("Overflow");
+		}
+		this.data[(this.first + this.n)%this.data.length] = x;
+		this.n++;
 
-  public int getTail()
-  {
-    return tail;
-  }
 
-  // Return the head of the list
-  public double peak()
-  {
-    return buffer[head];
-  }
+	}
+
+	//throws an exception if the RingBuffer is empty, otherwise it removes a value from the front of the Ringbuffer
+	public double dequeue() throws RuntimeException{
+		double returnValue = peek();
+
+		this.first = (this.first +1)%this.data.length;
+		this.n--;
+		return returnValue;
+	}
+
+	double peek() throws RuntimeException{
+		if(isEmpty()){
+			throw new RuntimeException("Underflow");
+		}
+		return this.data[this.first];
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
 }
